@@ -1,0 +1,100 @@
+<h1>Chat</h1>
+
+<div id="chat">
+  <% if @chat.present?%>
+    <% @chats.each do |activity| %>
+      <div class="form-div1" id="activity-part">
+        <div class="iamge-div-heading mt-5">
+          <h4 class="form-heading" style="color:white;"><%= activity.user.email %></h4>
+        </div>
+        <div class="info-details mx-5 mt-2  justify-text">
+          <p class="content-heading" style="display: inline; margin-right: 10px;"><%=activity.message %></p>
+          <p class="date-activity" style="display: inline;"><%= activity.created_at.strftime("%m/%d/%Y")%></p>
+        </div>
+      </div><hr>
+      <% if activity.automatic_response.present? %>
+        <div class="form-div1" id="activity-part">
+          <div class="iamge-div-heading mt-5">
+            <h4 class="form-heading" style="color:white;">ChatGPT</h4>
+          </div>
+          <div class="info-details mx-5 mt-2  justify-text">
+            <p class="content-heading" style="display: inline; margin-right: 10px;"><%= activity.automatic_response %></p>
+            <p class="date-activity" style="display: inline;"><%= activity.created_at.strftime("%m/%d/%Y")%></p>
+          </div>
+        </div><hr>
+      <% end %>
+    <% end %>
+  <%end %>
+</div>
+<%= form_with(model: @chat, url: chats_path, data: { controller: "chats", action: "create" }, remote: true, id: "new_message") do |form| %>
+  <%= form.text_field :message, placeholder: "Type your message...", class: "fixed-position" %>
+  <%= form.submit "Send" %>
+<% end %>
+
+
+<style>
+.form-div1 {
+  margin-left:9%;
+  @media (max-width: 500px) {
+    margin-left: 0px
+  }
+}
+.iamge-div-heading {
+  @media (max-width: 500px) {
+    display: flex;
+  }
+}
+.form-heading {
+      font-style: normal;
+      font-family: "Inter", sans-serif;
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 27px;
+      color: $white-color;
+      margin-bottom: 34px;
+      margin-top: 35px;
+    }
+
+    .info-details {
+      .exp-name,
+      .recieptent-name,
+      .session-date,
+      .session-time {
+        font-family: "Inter", sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        color: #fff;
+      }
+      .recieptent-name {
+        color: $maize-color;
+      }
+  
+      .session-date,
+      .session-time {
+        font-weight: normal;
+        color: #fff;
+      }
+  
+      .session-message {
+        text-align: justify;
+        max-width: 350px;
+        font-family: "Inter", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #ffffff;
+        margin-top: 17px;
+      }
+    }
+    h5.content-heading {
+      width: fit-content;
+    }
+    .info-details.mx-5.mt-2 {
+        padding-left: 14px;
+      }
+      p.date-activity {
+      float: right;
+    }
+</style>
