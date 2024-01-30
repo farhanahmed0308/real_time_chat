@@ -27,12 +27,27 @@
   <%end %>
 </div>
 <%= form_with(model: @chat, url: chats_path, data: { controller: "chats", action: "create" }, remote: true, id: "new_message") do |form| %>
-  <%= form.text_field :message, placeholder: "Type your message...", class: "fixed-position" %>
-  <%= form.submit "Send" %>
+  <div><%= form.text_field :message, placeholder: "Type your message...", class: "fixed-position type-input-field" %>
+  <%= form.submit "Send", class: "type-submit-button" %>
+  </div>
 <% end %>
 
 
 <style>
+.type-input-field {
+    width: 50%;
+    margin-left: 222px;
+    height: 63px;
+    border-radius: 11px;
+}
+.type-submit-button {
+    height: 63px;
+    border-radius: 11px;
+    border-left: none;
+    margin-left: -53px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
 .form-div1 {
   margin-left:9%;
   @media (max-width: 500px) {
