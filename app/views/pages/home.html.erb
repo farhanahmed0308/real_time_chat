@@ -1,0 +1,36 @@
+<div data-controller="page" class="chat-container">
+  <h1>ChatGPT</h1>
+  <section data-page-target="conversation" class="chat-conversation">
+  </section>
+  <%= form_with data: { action: "page#generateResponse" } do |form| %>
+    <div class="chat-input">
+      <%= form.text_area :message, id: 'prompt',data:{ page_target: "prompt" }%>
+      <%= form.submit 'Send' %>
+    </div>
+  <% end %>
+</div>
+
+
+
+<style>
+
+
+pre {
+    white-space: pre-wrap;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 95vh; /* takes full viewport height */
+}
+
+.chat-conversation {
+    flex-grow: 1; /* takes up all available space */
+    overflow-y: auto;
+}
+
+.chat-input {
+    flex-shrink: 0; /* prevents the input from shrinking */
+}
+</style>
